@@ -1,27 +1,19 @@
 import { useState } from 'react';
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Form submitted!');
-    // optional: reset the form
     setFormData({ name: '', email: '', message: '' });
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit} style={{ maxWidth: 600 }}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
@@ -45,10 +37,11 @@ function Contact() {
           onChange={handleChange}
           style={{ display: 'block', width: '100%', padding: '8px', margin: '10px 0' }}
         />
-        <button type="submit" style={{ padding: '8px 16px' }}>Send Message</button>
+        <button type="submit" style={{ padding: '8px 16px', cursor: 'pointer' }}>Send Message</button>
       </form>
     </div>
   );
 }
 
 export default Contact;
+

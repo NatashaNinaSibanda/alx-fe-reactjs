@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchComponent from "./components/SearchComponent";
+import Search from "./components/Search";
 import { searchUsers, enrichUsers } from "./services/githubService";
 import UserCard from "./components/UserCard";
 
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <SearchComponent onSearch={handleSearch} />
+      <Search onSearch={handleSearch} />
 
       {loading ? (
         <p className="text-center mt-10 text-gray-600">Loading users...</p>

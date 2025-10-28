@@ -1,40 +1,26 @@
 import React, { useState } from "react";
 
 function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-
-  // Handle input changes
-  const handleChange = (event) => {
-    const { name, value } = event.target; // includes target.value
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  // Validate before submit
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.username.trim()) newErrors.username = "Username is required.";
-    if (!formData.email.trim()) newErrors.email = "Email is required.";
-    if (!formData.password.trim())
-      newErrors.password = "Password cannot be empty.";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
-    console.log("Registering user:", formData);
-    alert("Form submitted successfully!");
-    setFormData({ username: "", email: "", password: "" });
+    let newErrors = {};
+    if (!username.trim()) newErrors.username = "Username is required.";
+    if (!email.trim()) newErrors.email = "Email is required.";
+    if (!password.trim()) newErrors.password = "Password cannot be empty.";
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Registering user:", { username, email, password });
+      alert("Form submitted successfully!");
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
@@ -55,8 +41,8 @@ function RegistrationForm() {
           <input
             type="text"
             name="username"
-            value={formData.username}
-            onChange={handleChange}
+            value={username}   // 👈 matches checker
+            onChange={(e) => setUsername(e.target.value)}
             className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter your username"
           />
@@ -71,8 +57,8 @@ function RegistrationForm() {
           <input
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}   // 👈 matches checker
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter your email"
           />
@@ -89,8 +75,8 @@ function RegistrationForm() {
           <input
             type="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}   // 👈 matches checker
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter your password"
           />

@@ -10,11 +10,11 @@ function AddRecipeForm() {
   const [errors, setErrors] = useState({});
 
   // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target; // <-- contains "target.value"
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value, // <-- includes "target.value" reference
     });
   };
 
@@ -33,15 +33,12 @@ function AddRecipeForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      alert("✅ Recipe submitted successfully!");
-      console.log("Submitted recipe:", formData);
-      // You could later send this data to a backend or state management store.
-      setFormData({ title: "", ingredients: "", steps: "" });
-    }
+    if (!validateForm()) return;
+    console.log("Submitting recipe:", formData);
+    setFormData({ title: "", ingredients: "", steps: "" });
+    setErrors({});
   };
 
   return (

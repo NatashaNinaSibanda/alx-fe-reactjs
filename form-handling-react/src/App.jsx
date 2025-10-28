@@ -1,8 +1,8 @@
 import React from "react";
-import FormikForm from "./components/FormikForm";
+import FormikForm from "./components/formikForm";
 
 function App() {
-  return <FormikForm />;
+  return <formikForm />;
 }
 
 export default App;
